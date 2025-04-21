@@ -70,35 +70,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="analysis_files/libs/bootstrap/bootstrap-1bc8a17f135ab3d594c857e9f48e611b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -177,30 +148,15 @@ window.Quarto = {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="数据处理没用的" class="level2">
-<h2 class="anchored" data-anchor-id="数据处理没用的">数据处理（没用的）</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> xfun<span class="sc">::</span><span class="fu">magic_path</span>(<span class="st">"FeSi_shell_comp_for_R_stats.csv"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>FeSi_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(file)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>resFe.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(FeSi <span class="sc">~</span> Source, <span class="at">data =</span> FeSi_data)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resFe.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> xfun<span class="sc">::</span><span class="fu">magic_path</span>(<span class="st">'AlSi_shell_comp_for_R_stats.csv'</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>AlSi_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(file)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>resAl.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(AlSi <span class="sc">~</span> Source, <span class="at">data =</span> AlSi_data)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resAl.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
 <section id="composition-mgalfesi-of-sed-free-anme-srb-consortia" class="level2">
 <h2 class="anchored" data-anchor-id="composition-mgalfesi-of-sed-free-anme-srb-consortia">Composition ((Mg+Al+Fe)/Si) of sed-free ANME-SRB consortia</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read data file for composition ((Mg+Al+Fe)/Si) of sed-free ANME-SRB consortia,</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ANME-SRB consortia in sediments and sediments without ANME-SRB consortia</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> xfun<span class="sc">::</span><span class="fu">magic_path</span>(<span class="st">"Dataset S3.xlsx"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>octtet_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(file)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>octtet_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read data file for composition ((Mg+Al+Fe)/Si) of sed-free ANME-SRB consortia,</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ANME-SRB consortia in sediments and sediments without ANME-SRB consortia</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> xfun<span class="sc">::</span><span class="fu">magic_path</span>(<span class="st">"Dataset S3.xlsx"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>octtet_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(file)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>octtet_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 425 × 5
    mg_al_fe_to_si Source                          Basin source_order basin_order
@@ -219,31 +175,31 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter by categories</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Sediments and ANME-SRB consortia-attached silicates from Jaco Scar</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>octtet_data_Jaco <span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data, Basin <span class="sc">==</span> <span class="st">"Jaco Scar"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>octtet_data_Jaco <span class="ot">=</span> octtet_data <span class="sc">|&gt;</span> </span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Basin <span class="sc">==</span> <span class="st">"Jaco Scar"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mg_al_fe_to_si, Source, Basin, source_order, basin_order) <span class="sc">|&gt;</span> </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Source =</span> <span class="fu">as_factor</span>(Source))</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Sediments and ANME-SRB consortia-attached silicates from the Santa Monica Basin</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>octtet_data_SMB <span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data, Basin <span class="sc">==</span> <span class="st">"Santa Monica"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>octtet_data_SMB_sedfree <span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached, Sediment-free"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Sediment"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>octtet_data_SMB_fromsed <span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Sediment"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments and </span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>octtet_data_SMB_freevsfromsed<span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Aggregate-attached, Sediment-free"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="do">##Sediments and ANME-SRB consortia-attached silicates from Eel River Basin</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>octtet_data_ERB <span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data, Basin <span class="sc">==</span> <span class="st">"Eel River"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter by categories</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Sediments and ANME-SRB consortia-attached silicates from Jaco Scar</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>octtet_data_Jaco <span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data, Basin <span class="sc">==</span> <span class="st">"Jaco Scar"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>octtet_data_Jaco <span class="ot">=</span> octtet_data <span class="sc">|&gt;</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Basin <span class="sc">==</span> <span class="st">"Jaco Scar"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mg_al_fe_to_si, Source, Basin, source_order, basin_order) <span class="sc">|&gt;</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Source =</span> <span class="fu">as_factor</span>(Source))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Sediments and ANME-SRB consortia-attached silicates from the Santa Monica Basin</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>octtet_data_SMB <span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data, Basin <span class="sc">==</span> <span class="st">"Santa Monica"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>octtet_data_SMB_sedfree <span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached, Sediment-free"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Sediment"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>octtet_data_SMB_fromsed <span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Sediment"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments and </span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>octtet_data_SMB_freevsfromsed<span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Aggregate-attached, Sediment-free"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="do">##Sediments and ANME-SRB consortia-attached silicates from Eel River Basin</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>octtet_data_ERB <span class="ot">&lt;-</span> <span class="fu">subset</span>(octtet_data, Basin <span class="sc">==</span> <span class="st">"Eel River"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"mg_al_fe_to_si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"source_order"</span>,<span class="st">"basin_order"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the Jaco Scar sediments and ANME-SRB consortia-attached silicates</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(octtet_data_Jaco)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the Jaco Scar sediments and ANME-SRB consortia-attached silicates</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(octtet_data_Jaco)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> mg_al_fe_to_si                  Source      Basin            source_order  
  Min.   :0.1900   Sediment          :63   Length:103         Min.   :1.000  
@@ -260,8 +216,8 @@ window.Quarto = {
  3rd Qu.:2   
  Max.   :2   </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>resot1.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(mg_al_fe_to_si <span class="sc">~</span> Source, <span class="at">data =</span> octtet_data_Jaco)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot1.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>resot1.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(mg_al_fe_to_si <span class="sc">~</span> Source, <span class="at">data =</span> octtet_data_Jaco)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot1.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 Source        1  2.242  2.2416   34.29 5.95e-08 ***
@@ -271,9 +227,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>resot2.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(mg_al_fe_to_si <span class="sc">~</span> Source, <span class="at">data =</span> octtet_data_SMB_sedfree)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot2.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>resot2.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(mg_al_fe_to_si <span class="sc">~</span> Source, <span class="at">data =</span> octtet_data_SMB_sedfree)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot2.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 Source        1   9.34   9.337   41.29 1.23e-09 ***
@@ -283,9 +239,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>resot3.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(mg_al_fe_to_si <span class="sc">~</span> Source, <span class="at">data =</span> octtet_data_SMB_fromsed)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot3.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>resot3.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(mg_al_fe_to_si <span class="sc">~</span> Source, <span class="at">data =</span> octtet_data_SMB_fromsed)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot3.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 Source        1   5.22   5.218   18.62 2.67e-05 ***
@@ -295,10 +251,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments and </span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>resot4.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(mg_al_fe_to_si <span class="sc">~</span> Source, <span class="at">data =</span> octtet_data_SMB_freevsfromsed)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot4.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments and </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>resot4.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(mg_al_fe_to_si <span class="sc">~</span> Source, <span class="at">data =</span> octtet_data_SMB_freevsfromsed)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot4.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
 Source       1  0.415  0.4148       3 0.0871 .
@@ -308,9 +264,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the sediments and ANME-SRB consortia-attached silicates from Eel River Basin</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>resot5.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(mg_al_fe_to_si <span class="sc">~</span> Source, <span class="at">data =</span> octtet_data_ERB)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot5.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the sediments and ANME-SRB consortia-attached silicates from Eel River Basin</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>resot5.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(mg_al_fe_to_si <span class="sc">~</span> Source, <span class="at">data =</span> octtet_data_ERB)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot5.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
 Source        1  1.126  1.1259   10.95 0.00129 **
@@ -320,50 +276,50 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Reorganize data</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>octtet_data<span class="sc">$</span>new_source_order <span class="ot">&lt;-</span> <span class="fu">reorder</span>(octtet_data<span class="sc">$</span>Source,octtet_data<span class="sc">$</span>source_order)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>octtet_data<span class="sc">$</span>new_basin_order <span class="ot">&lt;-</span> <span class="fu">reorder</span>(octtet_data<span class="sc">$</span>Basin,octtet_data<span class="sc">$</span>basin_order)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Make violin plots</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>ot <span class="ot">=</span> <span class="fu">ggplot</span>(octtet_data, <span class="fu">aes</span>(new_source_order, mg_al_fe_to_si))</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>ot <span class="sc">+</span> </span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span> </span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width=</span><span class="fl">0.2</span>, <span class="at">outliers =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_compare_means</span>(<span class="at">method =</span> <span class="st">"aov"</span>, <span class="at">label =</span> <span class="st">"p"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_compare_means</span>(<span class="at">method =</span> <span class="st">'t.test'</span>, <span class="at">label.y =</span> <span class="dv">2</span>,</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">ref.group =</span> <span class="st">"Sediment"</span>, <span class="at">label =</span> <span class="st">"p.signif"</span>) <span class="sc">+</span></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a> <span class="co"># stat_compare_means(method = "t.test",</span></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                     comparisons = list(</span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="co">#                       c("Sediment", "Aggregate-attached"),</span></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="co">#                       c("Aggregate-attached, Sediment-free", "Aggregate-attached"),</span></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co">#                       c("Sediment", "Aggregate-attached, Sediment-free")</span></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a> <span class="co">#                    )) +</span></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_jitter(width = 0.2)</span></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>new_basin_order, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">space =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"(Mg+Al+Fe)/Si"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Reorganize data</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>octtet_data<span class="sc">$</span>new_source_order <span class="ot">&lt;-</span> <span class="fu">reorder</span>(octtet_data<span class="sc">$</span>Source,octtet_data<span class="sc">$</span>source_order)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>octtet_data<span class="sc">$</span>new_basin_order <span class="ot">&lt;-</span> <span class="fu">reorder</span>(octtet_data<span class="sc">$</span>Basin,octtet_data<span class="sc">$</span>basin_order)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Make violin plots</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>ot <span class="ot">=</span> <span class="fu">ggplot</span>(octtet_data, <span class="fu">aes</span>(new_source_order, mg_al_fe_to_si))</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>ot <span class="sc">+</span> </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span> </span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width=</span><span class="fl">0.2</span>, <span class="at">outliers =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_compare_means</span>(<span class="at">method =</span> <span class="st">"aov"</span>, <span class="at">label =</span> <span class="st">"p"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_compare_means</span>(<span class="at">method =</span> <span class="st">'t.test'</span>, <span class="at">label.y =</span> <span class="dv">2</span>,</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">ref.group =</span> <span class="st">"Sediment"</span>, <span class="at">label =</span> <span class="st">"p.signif"</span>) <span class="sc">+</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a> <span class="co"># stat_compare_means(method = "t.test",</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                     comparisons = list(</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="co">#                       c("Sediment", "Aggregate-attached"),</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="co">#                       c("Aggregate-attached, Sediment-free", "Aggregate-attached"),</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="co">#                       c("Sediment", "Aggregate-attached, Sediment-free")</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a> <span class="co">#                    )) +</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_jitter(width = 0.2)</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>new_basin_order, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">space =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"(Mg+Al+Fe)/Si"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># + scale_color_brewer(palette = "Blues")</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># + geom_violin(aes(new_source_order,octtet)) + geom_point(aes(octtet_data$ID)) + geom_jitter(width=0.3,aes(color=octtet_data$ID), size=2.5)#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># + scale_color_brewer(palette = "Blues")</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># + geom_violin(aes(new_source_order,octtet)) + geom_point(aes(octtet_data$ID)) + geom_jitter(width=0.3,aes(color=octtet_data$ID), size=2.5)#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="composition-alsi-of-sed-free-anme-srb-consortia" class="level2">
 <h2 class="anchored" data-anchor-id="composition-alsi-of-sed-free-anme-srb-consortia">Composition (Al/Si) of sed-free ANME-SRB consortia</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read data file for composition (Al/Si) of sed-free ANME-SRB consortia,</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ANME-SRB consortia in sediments and sediments without ANME-SRB consortia</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>AlSi_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(xfun<span class="sc">::</span><span class="fu">magic_path</span>(<span class="st">'Dataset S2.xlsx'</span>))</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>AlSi_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read data file for composition (Al/Si) of sed-free ANME-SRB consortia,</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ANME-SRB consortia in sediments and sediments without ANME-SRB consortia</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>AlSi_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(xfun<span class="sc">::</span><span class="fu">magic_path</span>(<span class="st">'Dataset S2.xlsx'</span>))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>AlSi_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 425 × 5
    Al.per.Si Source                           Basin `Source order` `Basin order`
@@ -382,48 +338,48 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter by categories</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Sediments and ANME-SRB consortia-attached silicates from Jaco Scar</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>AlSi_data_Jaco <span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data, Basin <span class="sc">==</span> <span class="st">"Jaco Scar"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Sediments and ANME-SRB consortia-attached silicates from the Santa Monica Basin</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>AlSi_data_SMB <span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data, Basin <span class="sc">==</span> <span class="st">"Santa Monica"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>AlSi_data_SMB_sedfree <span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached, Sediment-free"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Sediment"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>AlSi_data_SMB_fromsed <span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Sediment"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments and </span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>AlSi_data_SMB_freevsfromsed<span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Aggregate-attached, Sediment-free"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="do">##Sediments and ANME-SRB consortia-attached silicates from Eel River Basin</span></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>AlSi_data_ERB <span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data, Basin <span class="sc">==</span> <span class="st">"Eel River"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter by categories</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Sediments and ANME-SRB consortia-attached silicates from Jaco Scar</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>AlSi_data_Jaco <span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data, Basin <span class="sc">==</span> <span class="st">"Jaco Scar"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Sediments and ANME-SRB consortia-attached silicates from the Santa Monica Basin</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>AlSi_data_SMB <span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data, Basin <span class="sc">==</span> <span class="st">"Santa Monica"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>AlSi_data_SMB_sedfree <span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached, Sediment-free"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Sediment"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>AlSi_data_SMB_fromsed <span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Sediment"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments and </span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>AlSi_data_SMB_freevsfromsed<span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data_SMB,Source <span class="sc">==</span>  <span class="st">"Aggregate-attached"</span> <span class="sc">|</span> Source <span class="sc">==</span>  <span class="st">"Aggregate-attached, Sediment-free"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="do">##Sediments and ANME-SRB consortia-attached silicates from Eel River Basin</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>AlSi_data_ERB <span class="ot">&lt;-</span> <span class="fu">subset</span>(AlSi_data, Basin <span class="sc">==</span> <span class="st">"Eel River"</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">"Al.per.Si"</span>,<span class="st">"Source"</span>,<span class="st">"Basin"</span>,<span class="st">"Source order"</span>,<span class="st">"Basin order"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>source_order <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Sediment"</span>, <span class="st">"Aggregate-attached"</span>,<span class="st">"Aggregate-attached, Sediment-free"</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>basin_order <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Eel River"</span>, <span class="st">"Jaco Scar"</span>, <span class="st">"Santa Monica"</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>AlSi_data <span class="ot">=</span> AlSi_data <span class="sc">|&gt;</span> </span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Source =</span> <span class="fu">factor</span>(Source, <span class="at">levels =</span> source_order),</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Basin =</span> <span class="fu">factor</span>(Basin, <span class="at">levels =</span> basin_order))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>source_order <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Sediment"</span>, <span class="st">"Aggregate-attached"</span>,<span class="st">"Aggregate-attached, Sediment-free"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>basin_order <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Eel River"</span>, <span class="st">"Jaco Scar"</span>, <span class="st">"Santa Monica"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>AlSi_data <span class="ot">=</span> AlSi_data <span class="sc">|&gt;</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Source =</span> <span class="fu">factor</span>(Source, <span class="at">levels =</span> source_order),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Basin =</span> <span class="fu">factor</span>(Basin, <span class="at">levels =</span> basin_order))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make violin plot</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(AlSi_data, <span class="fu">aes</span>(Source, Al.per.Si)) <span class="sc">+</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width=</span><span class="fl">0.2</span>, <span class="at">outliers =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Basin, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">space =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Al per Si"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make violin plot</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(AlSi_data, <span class="fu">aes</span>(Source, Al.per.Si)) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width=</span><span class="fl">0.2</span>, <span class="at">outliers =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Basin, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">space =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Al per Si"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the Jaco Scar sediments and ANME-SRB consortia-attached silicates</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>resot6.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Al.per.Si <span class="sc">~</span> Source, <span class="at">data =</span> AlSi_data_Jaco)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot6.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the Jaco Scar sediments and ANME-SRB consortia-attached silicates</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>resot6.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Al.per.Si <span class="sc">~</span> Source, <span class="at">data =</span> AlSi_data_Jaco)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot6.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 Source        1 0.3026 0.30257   29.56 3.78e-07 ***
@@ -433,9 +389,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>resot7.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Al.per.Si <span class="sc">~</span> Source, <span class="at">data =</span> AlSi_data_SMB_sedfree)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot7.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Perform one-way ANOVA test on the Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>resot7.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Al.per.Si <span class="sc">~</span> Source, <span class="at">data =</span> AlSi_data_SMB_sedfree)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot7.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value Pr(&gt;F)    
 Source        1  2.130  2.1299   86.96 &lt;2e-16 ***
@@ -446,8 +402,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Perform one-way ANOVA test on the silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>resot8.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Al.per.Si <span class="sc">~</span> Source, <span class="at">data =</span> AlSi_data_SMB_fromsed)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot8.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>resot8.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Al.per.Si <span class="sc">~</span> Source, <span class="at">data =</span> AlSi_data_SMB_fromsed)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot8.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 Source        1  1.058  1.0584   36.61 8.61e-09 ***
@@ -458,8 +414,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>对来自Santa Monica Basin的沉积物中附着于ANME-SRB联合体的硅酸盐，以及在培养实验中无沉积物的 ANME-SRB联合体上附着的富含硅（Si-rich）的相，进行单因素方差分析（One-way ANOVA）测试。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>resot9.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Al.per.Si <span class="sc">~</span> Source, <span class="at">data =</span> AlSi_data_SMB_freevsfromsed)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot9.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>resot9.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Al.per.Si <span class="sc">~</span> Source, <span class="at">data =</span> AlSi_data_SMB_freevsfromsed)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot9.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
 Source       1  0.128 0.12798   6.676 0.0116 *
@@ -470,8 +426,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Perform one-way ANOVA test on the sediments and ANME-SRB consortia-attached silicates from Eel River Basin</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>resot10.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Al.per.Si <span class="sc">~</span> Source, <span class="at">data =</span> AlSi_data_ERB)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot10.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>resot10.aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Al.per.Si <span class="sc">~</span> Source, <span class="at">data =</span> AlSi_data_ERB)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resot10.aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
 Source        1 0.4429  0.4429   17.88 5.1e-05 ***
@@ -480,146 +436,7 @@ Residuals   103 2.5510  0.0248
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FeSi_data &lt;- read.csv('Fe_Si_for_R_stats_all.csv')</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># FeSi_data_Jaco &lt;- subset(FeSi_data, Basin == "Jaco Scar", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># FeSi_data_SMB &lt;- subset(FeSi_data, Basin == "Santa Monica", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># FeSi_data_SMB_sedfree &lt;- subset(FeSi_data_SMB,Source ==  "Aggregate-attached, Sediment-free" | Source ==  "Sediment", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co"># FeSi_data_SMB_fromsed &lt;- subset(FeSi_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Sediment", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co"># FeSi_data_SMB_freevsfromsed&lt;- subset(FeSi_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Aggregate-attached, Sediment-free", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co"># FeSi_data_ERB &lt;- subset(FeSi_data, Basin == "Eel River", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co"># FeSi_data$new_source_order &lt;- reorder(FeSi_data$Source,FeSi_data$source_order)</span></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co"># FeSi_data$new_basin_order &lt;- reorder(FeSi_data$Basin,FeSi_data$basin_order)</span></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ot&lt;-ggplot(FeSi_data,aes(new_source_order,Fe.per.Si))</span></span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="co"># #ot+geom_violin(aes())+geom_boxplot(width=0.07)+facet_grid(~new_basin_order, scales = "free", space = "free")+scale_color_brewer(palette = "Blues")#+geom_point(aes(FeSi_data$ID))+geom_jitter(width=0.3,aes(color=FeSi_data$ID), size=2.5)#</span></span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="co"># ot+geom_violin()+geom_boxplot(width=0.6)+facet_grid(~new_basin_order, scales = "free", space = "free")#+scale_color_brewer(palette = "Blues")#+geom_violin(aes(new_source_order,octtet))+geom_point(aes(octtet_data$ID))+geom_jitter(width=0.3,aes(color=octtet_data$ID), size=2.5)#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
-</section>
-<section id="section" class="level1">
-<h1></h1>
-</section>
-<section id="section-1" class="level1">
-<h1></h1>
-</section>
-<section id="section-2" class="level1">
-<h1></h1>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_data &lt;- read.csv('Al_for_R_stats_all.csv')</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_data_Jaco &lt;- subset(Al_data, Basin == "Jaco Scar", select = c("Al","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_data_SMB &lt;- subset(Al_data, Basin == "Santa Monica", select = c("Al","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_data_SMB_sedfree &lt;- subset(Al_data_SMB,Source ==  "Aggregate-attached, Sediment-free" | Source ==  "Sediment", select = c("Al","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_data_SMB_fromsed &lt;- subset(Al_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Sediment", select = c("Al","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_data_SMB_freevsfromsed&lt;- subset(Al_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Aggregate-attached, Sediment-free", select = c("Al","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_data_ERB &lt;- subset(Al_data, Basin == "Eel River", select = c("Al","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_data_attached_only &lt;-  subset(Al_data, Source == "Aggregate-attached, Sediment-free"| Source == "Aggregate-attached", select = c("Al","Source","Basin","source_order","basin_order"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># resot1.aov &lt;- aov(Al ~ Source, data = Al_data_Jaco)</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot1.aov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># resot2.aov &lt;- aov(Al ~ Source, data = Al_data_SMB_sedfree)</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot2.aov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># resot3.aov &lt;- aov(Al ~ Source, data = Al_data_SMB_fromsed)</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot3.aov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># resot4.aov &lt;- aov(Al ~ Source, data = Al_data_SMB_freevsfromsed)</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot4.aov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># resot5.aov &lt;- aov(Al ~ Source, data = Al_data_ERB)</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot5.aov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_data$new_source_order &lt;- reorder(Al_data$Source,Al_data$source_order)</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_data$new_basin_order &lt;- reorder(Al_data$Basin,Al_data$basin_order)</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ot&lt;-ggplot(Al_data,aes(new_source_order,Al))</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ot+geom_boxplot(width=0.6)+facet_grid(~new_basin_order, scales = "free", space = "free")#+scale_color_brewer(palette = "Blues")#+geom_violin(aes(new_source_order,Al))+geom_point(aes(Al_data$ID))+geom_jitter(width=0.3,aes(color=Al_data$ID), size=2.5)#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_att_only&lt;-ggplot(Al_data_attached_only,aes(Source,Al))</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Al_att_only+geom_boxplot(width=0.6)+facet_grid(~Basin, scales = "free", space = "free")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_data &lt;- read.csv('Si_for_R_stats_all.csv')</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_data_Jaco &lt;- subset(Si_data, Basin == "Jaco Scar", select = c("Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_data_SMB &lt;- subset(Si_data, Basin == "Santa Monica", select = c("Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_data_SMB_sedfree &lt;- subset(Si_data_SMB,Source ==  "Aggregate-attached, Sediment-free" | Source ==  "Sediment", select = c("Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_data_SMB_fromsed &lt;- subset(Si_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Sediment", select = c("Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_data_SMB_freevsfromsed&lt;- subset(Si_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Aggregate-attached, Sediment-free", select = c("Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_data_ERB &lt;- subset(Si_data, Basin == "Eel River", select = c("Si","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_data_attached_only &lt;-  subset(Si_data, Source == "Aggregate-attached, Sediment-free"| Source == "Aggregate-attached", select = c("Si","Source","Basin","source_order","basin_order"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># resot1.aov &lt;- aov(Si ~ Source, data = Si_data_Jaco)</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot1.aov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># resot2.aov &lt;- aov(Si ~ Source, data = Si_data_SMB_sedfree)</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot2.aov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># resot3.aov &lt;- aov(Si ~ Source, data = Si_data_SMB_fromsed)</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot3.aov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># resot4.aov &lt;- aov(Si ~ Source, data = Si_data_SMB_freevsfromsed)</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot4.aov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># resot5.aov &lt;- aov(Si ~ Source, data = Si_data_ERB)</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot5.aov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_data$new_source_order &lt;- reorder(Si_data$Source,Si_data$source_order)</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_data$new_basin_order &lt;- reorder(Si_data$Basin,Si_data$basin_order)</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ot&lt;-ggplot(Si_data,aes(new_source_order,Si))</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ot+geom_boxplot(width=0.6)+facet_grid(~new_basin_order, scales = "free", space = "free")#+scSie_color_brewer(pSiette = "Blues")#+geom_violin(aes(new_source_order,Si))+geom_point(aes(Si_data$ID))+geom_jitter(width=0.3,aes(color=Si_data$ID), size=2.5)#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_att_only&lt;-ggplot(Si_data_attached_only,aes(Source,Si))</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Si_att_only+geom_boxplot(width=0.6)+facet_grid(~Basin, scales = "free", space = "free")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_data &lt;- read.csv('Fe_for_R_stats_all.csv')</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_data_Jaco &lt;- subset(Fe_data, Basin == "Jaco Scar", select = c("Fe","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_data_SMB &lt;- subset(Fe_data, Basin == "Santa Monica", select = c("Fe","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_data_SMB_sedfree &lt;- subset(Fe_data_SMB,Source ==  "Aggregate-attached, Sediment-free" | Source ==  "Sediment", select = c("Fe","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_data_SMB_fromsed &lt;- subset(Fe_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Sediment", select = c("Fe","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_data_SMB_freevsfromsed&lt;- subset(Fe_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Aggregate-attached, Sediment-free", select = c("Fe","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_data_ERB &lt;- subset(Fe_data, Basin == "Eel River", select = c("Fe","Source","Basin","source_order","basin_order"))</span></span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_data_attached_only &lt;-  subset(Fe_data, Source == "Aggregate-attached, Sediment-free"| Source == "Aggregate-attached", select = c("Fe","Source","Basin","source_order","basin_order"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># resot1.aov &lt;- aov(Fe ~ Source, data = Fe_data_Jaco)</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot1.aov)</span></span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co"># resot2.aov &lt;- aov(Fe ~ Source, data = Fe_data_SMB_sedfree)</span></span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot2.aov)</span></span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co"># resot3.aov &lt;- aov(Fe ~ Source, data = Fe_data_SMB_fromsed)</span></span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot3.aov)</span></span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="co"># resot4.aov &lt;- aov(Fe ~ Source, data = Fe_data_SMB_freevsfromsed)</span></span>
-<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot4.aov)</span></span>
-<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a><span class="co"># resot5.aov &lt;- aov(Fe ~ Source, data = Fe_data_ERB)</span></span>
-<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(resot5.aov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_data$new_source_order &lt;- reorder(Fe_data$Source,Fe_data$source_order)</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_data$new_basin_order &lt;- reorder(Fe_data$Basin,Fe_data$basin_order)</span></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ot&lt;-ggplot(Fe_data,aes(new_source_order,Fe))</span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ot+geom_boxplot(width=0.6)+facet_grid(~new_basin_order, scales = "free", space = "free")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>#+scSie_color_brewer(pSiette = “Blues”)#+geom_violin(aes(new_source_order,Si))+geom_point(aes(Fe_data<span class="math inline">\(ID))+geom_jitter(width=0.3,aes(color=Fe_data\)</span>ID), size=2.5)#</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_att_only&lt;-ggplot(Fe_data_attached_only,aes(Source,Fe))</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fe_att_only+geom_boxplot(width=0.6)+facet_grid(~Basin, scales = "free", space = "free")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 
 </main>
