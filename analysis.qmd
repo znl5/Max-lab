@@ -1,0 +1,409 @@
+---
+title: "文献复现"
+author: "max"
+date: now
+output: html_document
+---
+
+# 分组数据分析实战
+
+在这一部分，将以论文中的数据分析为例，展示分组数据分析和可视化的重复性研究。首先，我们简单介绍一下论文的研究背景、方法和主要结果。然后，使用原始数据进行可重复研究，通过复现论文中的图片，展示分组数据分析和可视化的重复性研究。
+
+## 论文研究概述
+
+## 数据准备
+
+论文的原始数据及分析代码都在 [GitHub](https://github.com/daniosro/Si_biomineralization_ANME_SRB.git) 上。首先，使用 Git 命令将代码克隆到本地：
+
+```bash
+git clone https://github.com/daniosro/Si_biomineralization_ANME_SRB.git --depth 1
+```
+
+## 加载所需的R包
+
+加载所需的R包，用于数据处理、可视化和统计分析。
+
+```{r}
+#| label: packages 
+library(readxl)
+library(tidyverse)
+```
+
+```{r}
+# 设置默认主题
+theme_set(theme_bw())
+```
+
+## 数据处理（没用的）
+
+```{r}
+#| eval: false
+file = xfun::magic_path("FeSi_shell_comp_for_R_stats.csv")
+FeSi_data <- read_csv(file)
+resFe.aov <- aov(FeSi ~ Source, data = FeSi_data)
+summary(resFe.aov)
+```
+
+
+```{r}
+#| eval: false
+file = xfun::magic_path('AlSi_shell_comp_for_R_stats.csv')
+AlSi_data <- read.csv(file)
+resAl.aov <- aov(AlSi ~ Source, data = AlSi_data)
+summary(resAl.aov)
+```
+
+## Composition ((Mg+Al+Fe)/Si) of sed-free ANME-SRB consortia
+
+```{r}
+
+#Read data file for composition ((Mg+Al+Fe)/Si) of sed-free ANME-SRB consortia,
+# ANME-SRB consortia in sediments and sediments without ANME-SRB consortia
+file = xfun::magic_path("Dataset S3.xlsx")
+octtet_data <- read_excel(file)
+
+octtet_data
+```
+
+
+```{r}
+#Filter by categories
+#Sediments and ANME-SRB consortia-attached silicates from Jaco Scar
+octtet_data_Jaco <- subset(octtet_data, Basin == "Jaco Scar", select = c("mg_al_fe_to_si","Source","Basin","source_order","basin_order"))
+
+octtet_data_Jaco = octtet_data |> 
+  filter(Basin == "Jaco Scar") |> 
+  select(mg_al_fe_to_si, Source, Basin, source_order, basin_order) |> 
+  mutate(Source = as_factor(Source))
+
+#Sediments and ANME-SRB consortia-attached silicates from the Santa Monica Basin
+octtet_data_SMB <- subset(octtet_data, Basin == "Santa Monica", select = c("mg_al_fe_to_si","Source","Basin","source_order","basin_order"))
+#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations
+octtet_data_SMB_sedfree <- subset(octtet_data_SMB,Source ==  "Aggregate-attached, Sediment-free" | Source ==  "Sediment", select = c("mg_al_fe_to_si","Source","Basin","source_order","basin_order"))
+#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments
+octtet_data_SMB_fromsed <- subset(octtet_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Sediment", select = c("mg_al_fe_to_si","Source","Basin","source_order","basin_order"))
+#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments and 
+#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations
+octtet_data_SMB_freevsfromsed<- subset(octtet_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Aggregate-attached, Sediment-free", select = c("mg_al_fe_to_si","Source","Basin","source_order","basin_order"))
+##Sediments and ANME-SRB consortia-attached silicates from Eel River Basin
+octtet_data_ERB <- subset(octtet_data, Basin == "Eel River", select = c("mg_al_fe_to_si","Source","Basin","source_order","basin_order"))
+```
+
+
+```{r}
+
+#Perform one-way ANOVA test on the Jaco Scar sediments and ANME-SRB consortia-attached silicates
+
+summary(octtet_data_Jaco)
+resot1.aov <- aov(mg_al_fe_to_si ~ Source, data = octtet_data_Jaco)
+summary(resot1.aov)
+```
+
+
+```{r}
+
+#Perform one-way ANOVA test on the Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations
+resot2.aov <- aov(mg_al_fe_to_si ~ Source, data = octtet_data_SMB_sedfree)
+summary(resot2.aov)
+```
+
+```{r}
+
+#Perform one-way ANOVA test on the silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments
+resot3.aov <- aov(mg_al_fe_to_si ~ Source, data = octtet_data_SMB_fromsed)
+summary(resot3.aov)
+```
+
+```{r}
+
+#Perform one-way ANOVA test on the silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments and 
+#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations
+resot4.aov <- aov(mg_al_fe_to_si ~ Source, data = octtet_data_SMB_freevsfromsed)
+summary(resot4.aov)
+```
+
+```{r}
+
+#Perform one-way ANOVA test on the sediments and ANME-SRB consortia-attached silicates from Eel River Basin
+resot5.aov <- aov(mg_al_fe_to_si ~ Source, data = octtet_data_ERB)
+summary(resot5.aov)
+```
+
+
+```{r}
+library(ggpubr)
+
+#Reorganize data
+octtet_data$new_source_order <- reorder(octtet_data$Source,octtet_data$source_order)
+octtet_data$new_basin_order <- reorder(octtet_data$Basin,octtet_data$basin_order)
+
+
+#Make violin plots
+ot = ggplot(octtet_data, aes(new_source_order, mg_al_fe_to_si))
+
+ot + 
+  geom_violin() + 
+  geom_boxplot(width=0.2, outliers = FALSE) +
+  stat_compare_means(method = "aov", label = "p", size = 3) +
+  stat_compare_means(method = 't.test', label.y = 2,
+                     ref.group = "Sediment", label = "p.signif") +
+ # stat_compare_means(method = "t.test",
+#                     comparisons = list(
+#                       c("Sediment", "Aggregate-attached"),
+#                       c("Aggregate-attached, Sediment-free", "Aggregate-attached"),
+#                       c("Sediment", "Aggregate-attached, Sediment-free")
+ #                    )) +
+  # geom_jitter(width = 0.2)
+  facet_grid(~new_basin_order, scales = "free", space = "free") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1, vjust = 1)) +
+  labs(x = "", y = "(Mg+Al+Fe)/Si")
+
+# + scale_color_brewer(palette = "Blues")
+# + geom_violin(aes(new_source_order,octtet)) + geom_point(aes(octtet_data$ID)) + geom_jitter(width=0.3,aes(color=octtet_data$ID), size=2.5)#
+
+```
+
+## Composition (Al/Si) of sed-free ANME-SRB consortia
+
+```{r}
+
+#Read data file for composition (Al/Si) of sed-free ANME-SRB consortia,
+# ANME-SRB consortia in sediments and sediments without ANME-SRB consortia
+AlSi_data <- read_excel(xfun::magic_path('Dataset S2.xlsx'))
+AlSi_data
+```
+
+```{r}
+
+#Filter by categories
+#Sediments and ANME-SRB consortia-attached silicates from Jaco Scar
+AlSi_data_Jaco <- subset(AlSi_data, Basin == "Jaco Scar", select = c("Al.per.Si","Source","Basin","Source order","Basin order"))
+#Sediments and ANME-SRB consortia-attached silicates from the Santa Monica Basin
+AlSi_data_SMB <- subset(AlSi_data, Basin == "Santa Monica", select = c("Al.per.Si","Source","Basin","Source order","Basin order"))
+#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations
+AlSi_data_SMB_sedfree <- subset(AlSi_data_SMB,Source ==  "Aggregate-attached, Sediment-free" | Source ==  "Sediment", select = c("Al.per.Si","Source","Basin","Source order","Basin order"))
+#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments
+AlSi_data_SMB_fromsed <- subset(AlSi_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Sediment", select = c("Al.per.Si","Source","Basin","Source order","Basin order"))
+#Silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments and 
+#Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations
+AlSi_data_SMB_freevsfromsed<- subset(AlSi_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Aggregate-attached, Sediment-free", select = c("Al.per.Si","Source","Basin","Source order","Basin order"))
+##Sediments and ANME-SRB consortia-attached silicates from Eel River Basin
+AlSi_data_ERB <- subset(AlSi_data, Basin == "Eel River", select = c("Al.per.Si","Source","Basin","Source order","Basin order"))
+```
+
+```{r}
+source_order = c("Sediment", "Aggregate-attached","Aggregate-attached, Sediment-free")
+basin_order = c("Eel River", "Jaco Scar", "Santa Monica")
+AlSi_data = AlSi_data |> 
+  mutate(Source = factor(Source, levels = source_order),
+         Basin = factor(Basin, levels = basin_order))
+```
+
+
+```{r}
+
+#Make violin plot
+ggplot(AlSi_data, aes(Source, Al.per.Si)) +
+  geom_violin() +
+  geom_boxplot(width=0.2, outliers = FALSE) +
+  facet_grid(~Basin, scales = "free", space = "free") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1, vjust = 1)) +
+  labs(x = "", y = "Al per Si")
+```
+
+```{r}
+
+#Perform one-way ANOVA test on the Jaco Scar sediments and ANME-SRB consortia-attached silicates
+resot6.aov <- aov(Al.per.Si ~ Source, data = AlSi_data_Jaco)
+summary(resot6.aov)
+```
+
+```{r}
+
+#Perform one-way ANOVA test on the Si-rich phase attached to sed-free ANME-SRB consortia from the Santa Monica Basin in incubations
+resot7.aov <- aov(Al.per.Si ~ Source, data = AlSi_data_SMB_sedfree)
+summary(resot7.aov)
+```
+
+
+Perform one-way ANOVA test on the silicates attached to ANME-SRB consortia from the Santa Monica Basin in sediments
+```{r}
+resot8.aov <- aov(Al.per.Si ~ Source, data = AlSi_data_SMB_fromsed)
+summary(resot8.aov)
+```
+
+对来自Santa Monica Basin的沉积物中附着于ANME-SRB联合体的硅酸盐，以及在培养实验中无沉积物的 ANME-SRB联合体上附着的富含硅（Si-rich）的相，进行单因素方差分析（One-way ANOVA）测试。
+
+```{r}
+resot9.aov <- aov(Al.per.Si ~ Source, data = AlSi_data_SMB_freevsfromsed)
+summary(resot9.aov)
+```
+
+
+Perform one-way ANOVA test on the sediments and ANME-SRB consortia-attached silicates from Eel River Basin
+```{r}
+resot10.aov <- aov(Al.per.Si ~ Source, data = AlSi_data_ERB)
+summary(resot10.aov)
+
+```
+
+```{r}
+# FeSi_data <- read.csv('Fe_Si_for_R_stats_all.csv')
+# FeSi_data_Jaco <- subset(FeSi_data, Basin == "Jaco Scar", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))
+# FeSi_data_SMB <- subset(FeSi_data, Basin == "Santa Monica", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))
+# FeSi_data_SMB_sedfree <- subset(FeSi_data_SMB,Source ==  "Aggregate-attached, Sediment-free" | Source ==  "Sediment", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))
+# FeSi_data_SMB_fromsed <- subset(FeSi_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Sediment", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))
+# FeSi_data_SMB_freevsfromsed<- subset(FeSi_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Aggregate-attached, Sediment-free", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))
+# FeSi_data_ERB <- subset(FeSi_data, Basin == "Eel River", select = c("Fe.per.Si","Source","Basin","source_order","basin_order"))
+# FeSi_data$new_source_order <- reorder(FeSi_data$Source,FeSi_data$source_order)
+# FeSi_data$new_basin_order <- reorder(FeSi_data$Basin,FeSi_data$basin_order)
+# ot<-ggplot(FeSi_data,aes(new_source_order,Fe.per.Si))
+# #ot+geom_violin(aes())+geom_boxplot(width=0.07)+facet_grid(~new_basin_order, scales = "free", space = "free")+scale_color_brewer(palette = "Blues")#+geom_point(aes(FeSi_data$ID))+geom_jitter(width=0.3,aes(color=FeSi_data$ID), size=2.5)#
+# ot+geom_violin()+geom_boxplot(width=0.6)+facet_grid(~new_basin_order, scales = "free", space = "free")#+scale_color_brewer(palette = "Blues")#+geom_violin(aes(new_source_order,octtet))+geom_point(aes(octtet_data$ID))+geom_jitter(width=0.3,aes(color=octtet_data$ID), size=2.5)#
+
+```
+# 
+# 
+# 
+```{r}
+# Al_data <- read.csv('Al_for_R_stats_all.csv')
+# Al_data_Jaco <- subset(Al_data, Basin == "Jaco Scar", select = c("Al","Source","Basin","source_order","basin_order"))
+# Al_data_SMB <- subset(Al_data, Basin == "Santa Monica", select = c("Al","Source","Basin","source_order","basin_order"))
+# Al_data_SMB_sedfree <- subset(Al_data_SMB,Source ==  "Aggregate-attached, Sediment-free" | Source ==  "Sediment", select = c("Al","Source","Basin","source_order","basin_order"))
+# Al_data_SMB_fromsed <- subset(Al_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Sediment", select = c("Al","Source","Basin","source_order","basin_order"))
+# Al_data_SMB_freevsfromsed<- subset(Al_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Aggregate-attached, Sediment-free", select = c("Al","Source","Basin","source_order","basin_order"))
+# Al_data_ERB <- subset(Al_data, Basin == "Eel River", select = c("Al","Source","Basin","source_order","basin_order"))
+# Al_data_attached_only <-  subset(Al_data, Source == "Aggregate-attached, Sediment-free"| Source == "Aggregate-attached", select = c("Al","Source","Basin","source_order","basin_order"))
+
+```
+
+
+```{r}
+# resot1.aov <- aov(Al ~ Source, data = Al_data_Jaco)
+# summary(resot1.aov)
+```
+
+
+```{r}
+# resot2.aov <- aov(Al ~ Source, data = Al_data_SMB_sedfree)
+# summary(resot2.aov)
+```
+
+```{r}
+# resot3.aov <- aov(Al ~ Source, data = Al_data_SMB_fromsed)
+# summary(resot3.aov)
+
+```
+
+```{r}
+# resot4.aov <- aov(Al ~ Source, data = Al_data_SMB_freevsfromsed)
+# summary(resot4.aov)
+```
+
+```{r}
+# resot5.aov <- aov(Al ~ Source, data = Al_data_ERB)
+# summary(resot5.aov)
+```
+
+```{r}
+# Al_data$new_source_order <- reorder(Al_data$Source,Al_data$source_order)
+# Al_data$new_basin_order <- reorder(Al_data$Basin,Al_data$basin_order)
+# ot<-ggplot(Al_data,aes(new_source_order,Al))
+# ot+geom_boxplot(width=0.6)+facet_grid(~new_basin_order, scales = "free", space = "free")#+scale_color_brewer(palette = "Blues")#+geom_violin(aes(new_source_order,Al))+geom_point(aes(Al_data$ID))+geom_jitter(width=0.3,aes(color=Al_data$ID), size=2.5)#
+```
+
+```{r}
+# Al_att_only<-ggplot(Al_data_attached_only,aes(Source,Al))
+# Al_att_only+geom_boxplot(width=0.6)+facet_grid(~Basin, scales = "free", space = "free")
+```
+
+
+```{r}
+# Si_data <- read.csv('Si_for_R_stats_all.csv')
+# Si_data_Jaco <- subset(Si_data, Basin == "Jaco Scar", select = c("Si","Source","Basin","source_order","basin_order"))
+# Si_data_SMB <- subset(Si_data, Basin == "Santa Monica", select = c("Si","Source","Basin","source_order","basin_order"))
+# Si_data_SMB_sedfree <- subset(Si_data_SMB,Source ==  "Aggregate-attached, Sediment-free" | Source ==  "Sediment", select = c("Si","Source","Basin","source_order","basin_order"))
+# Si_data_SMB_fromsed <- subset(Si_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Sediment", select = c("Si","Source","Basin","source_order","basin_order"))
+# Si_data_SMB_freevsfromsed<- subset(Si_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Aggregate-attached, Sediment-free", select = c("Si","Source","Basin","source_order","basin_order"))
+# Si_data_ERB <- subset(Si_data, Basin == "Eel River", select = c("Si","Source","Basin","source_order","basin_order"))
+# Si_data_attached_only <-  subset(Si_data, Source == "Aggregate-attached, Sediment-free"| Source == "Aggregate-attached", select = c("Si","Source","Basin","source_order","basin_order"))
+```
+
+```{r}
+# resot1.aov <- aov(Si ~ Source, data = Si_data_Jaco)
+# summary(resot1.aov)
+```
+
+```{r}
+# resot2.aov <- aov(Si ~ Source, data = Si_data_SMB_sedfree)
+# summary(resot2.aov)
+```
+
+```{r}
+# resot3.aov <- aov(Si ~ Source, data = Si_data_SMB_fromsed)
+# summary(resot3.aov)
+```
+
+```{r}
+# resot4.aov <- aov(Si ~ Source, data = Si_data_SMB_freevsfromsed)
+# summary(resot4.aov)
+```
+
+```{r}
+# resot5.aov <- aov(Si ~ Source, data = Si_data_ERB)
+# summary(resot5.aov)
+```
+
+```{r}
+# Si_data$new_source_order <- reorder(Si_data$Source,Si_data$source_order)
+# Si_data$new_basin_order <- reorder(Si_data$Basin,Si_data$basin_order)
+# ot<-ggplot(Si_data,aes(new_source_order,Si))
+# ot+geom_boxplot(width=0.6)+facet_grid(~new_basin_order, scales = "free", space = "free")#+scSie_color_brewer(pSiette = "Blues")#+geom_violin(aes(new_source_order,Si))+geom_point(aes(Si_data$ID))+geom_jitter(width=0.3,aes(color=Si_data$ID), size=2.5)#
+```
+
+```{r}
+# Si_att_only<-ggplot(Si_data_attached_only,aes(Source,Si))
+# Si_att_only+geom_boxplot(width=0.6)+facet_grid(~Basin, scales = "free", space = "free")
+```
+
+```{r}
+# Fe_data <- read.csv('Fe_for_R_stats_all.csv')
+# Fe_data_Jaco <- subset(Fe_data, Basin == "Jaco Scar", select = c("Fe","Source","Basin","source_order","basin_order"))
+# Fe_data_SMB <- subset(Fe_data, Basin == "Santa Monica", select = c("Fe","Source","Basin","source_order","basin_order"))
+# Fe_data_SMB_sedfree <- subset(Fe_data_SMB,Source ==  "Aggregate-attached, Sediment-free" | Source ==  "Sediment", select = c("Fe","Source","Basin","source_order","basin_order"))
+# Fe_data_SMB_fromsed <- subset(Fe_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Sediment", select = c("Fe","Source","Basin","source_order","basin_order"))
+# Fe_data_SMB_freevsfromsed<- subset(Fe_data_SMB,Source ==  "Aggregate-attached" | Source ==  "Aggregate-attached, Sediment-free", select = c("Fe","Source","Basin","source_order","basin_order"))
+# Fe_data_ERB <- subset(Fe_data, Basin == "Eel River", select = c("Fe","Source","Basin","source_order","basin_order"))
+# Fe_data_attached_only <-  subset(Fe_data, Source == "Aggregate-attached, Sediment-free"| Source == "Aggregate-attached", select = c("Fe","Source","Basin","source_order","basin_order"))
+```
+
+
+```{r}
+# resot1.aov <- aov(Fe ~ Source, data = Fe_data_Jaco)
+# summary(resot1.aov)
+# resot2.aov <- aov(Fe ~ Source, data = Fe_data_SMB_sedfree)
+# summary(resot2.aov)
+# 
+# resot3.aov <- aov(Fe ~ Source, data = Fe_data_SMB_fromsed)
+# summary(resot3.aov)
+# 
+# resot4.aov <- aov(Fe ~ Source, data = Fe_data_SMB_freevsfromsed)
+# summary(resot4.aov)
+# 
+# resot5.aov <- aov(Fe ~ Source, data = Fe_data_ERB)
+# summary(resot5.aov)
+```
+
+```{r}
+# Fe_data$new_source_order <- reorder(Fe_data$Source,Fe_data$source_order)
+# Fe_data$new_basin_order <- reorder(Fe_data$Basin,Fe_data$basin_order)
+# ot<-ggplot(Fe_data,aes(new_source_order,Fe))
+# ot+geom_boxplot(width=0.6)+facet_grid(~new_basin_order, scales = "free", space = "free")
+```
+#+scSie_color_brewer(pSiette = "Blues")#+geom_violin(aes(new_source_order,Si))+geom_point(aes(Fe_data$ID))+geom_jitter(width=0.3,aes(color=Fe_data$ID), size=2.5)#
+
+
+```{r}
+# Fe_att_only<-ggplot(Fe_data_attached_only,aes(Source,Fe))
+# Fe_att_only+geom_boxplot(width=0.6)+facet_grid(~Basin, scales = "free", space = "free")
+```
