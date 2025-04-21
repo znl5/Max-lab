@@ -34,24 +34,6 @@ library(tidyverse)
 theme_set(theme_bw())
 ```
 
-## 数据处理（没用的）
-
-```{r}
-#| eval: false
-file = xfun::magic_path("FeSi_shell_comp_for_R_stats.csv")
-FeSi_data <- read_csv(file)
-resFe.aov <- aov(FeSi ~ Source, data = FeSi_data)
-summary(resFe.aov)
-```
-
-
-```{r}
-#| eval: false
-file = xfun::magic_path('AlSi_shell_comp_for_R_stats.csv')
-AlSi_data <- read.csv(file)
-resAl.aov <- aov(AlSi ~ Source, data = AlSi_data)
-summary(resAl.aov)
-```
 
 ## Composition ((Mg+Al+Fe)/Si) of sed-free ANME-SRB consortia
 
@@ -246,3 +228,4 @@ resot10.aov <- aov(Al.per.Si ~ Source, data = AlSi_data_ERB)
 summary(resot10.aov)
 
 ```
+
