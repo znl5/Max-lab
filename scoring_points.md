@@ -13,7 +13,7 @@ file <- xfun::magic_path("Dataset S3.xlsx")
 octtet_data <- read_excel(file)
 print(dim(octtet_data))  # 输出: [1] 425   5
 
-# 得分点***：
+# 得分点：
 
 ✅ 使用xfun::magic_path实现跨平台路径兼容，确保代码在不同操作系统上均可正确运行
  
@@ -32,7 +32,7 @@ octtet_data_Jaco <- octtet_data |>
 octtet_data_SMB_sedfree <- octtet_data_SMB |> 
   filter(Source %in% c("Aggregate-attached, Sediment-free", "Sediment"))
 
-# 得分点***：
+# 得分点：
 
 ✅ 管道操作符(|>)提升代码可读性，使数据处理流程更加直观清晰
 
@@ -53,7 +53,7 @@ summary(resot1.aov)
 Source        1  2.242   2.242   34.29 5.95e-08 
 Residuals   101  6.602   0.065
 
-# 得分点***：
+# 得分点：
 
 ✅ 正确构建单因素方差分析模型，合理设置因变量与自变量
 
@@ -70,7 +70,7 @@ results <- lapply(basins, function(b){
   aov(mg_al_fe_to_si ~ Source, data = data)
 })
 
-# 得分点***：
+# 得分点：
 
 ✅ 使用 lapply 实现自动化批量分析，避免重复代码书写，提升效率
 
