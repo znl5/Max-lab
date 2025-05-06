@@ -1,0 +1,5 @@
+"0","#| eval: false"
+"0","file = xfun::magic_path('AlSi_shell_comp_for_R_stats.csv')"
+"2","错误于xfun::magic_path(""AlSi_shell_comp_for_R_stats.csv""): 
+  Could not find the path ""AlSi_shell_comp_for_R_stats.csv"" in any subdirectories.
+"

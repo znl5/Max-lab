@@ -1,0 +1,5 @@
+"0","source_order = c(""Sediment"", ""Aggregate-attached"",""Aggregate-attached, Sediment-free"")"
+"0","basin_order = c(""Eel River"", ""Jaco Scar"", ""Santa Monica"")"
+"0","AlSi_data = AlSi_data |> "
+"0","  mutate(Source = factor(Source, levels = source_order),"
+"0","         Basin = factor(Basin, levels = basin_order))"

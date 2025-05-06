@@ -1,0 +1,7 @@
+"0",""
+"0","#Read data file for composition ((Mg+Al+Fe)/Si) of sed-free ANME-SRB consortia,"
+"0","# ANME-SRB consortia in sediments and sediments without ANME-SRB consortia"
+"0","file = xfun::magic_path(""Dataset S3.xlsx"")"
+"0","octtet_data <- read_excel(file)"
+"0",""
+"0","octtet_data"

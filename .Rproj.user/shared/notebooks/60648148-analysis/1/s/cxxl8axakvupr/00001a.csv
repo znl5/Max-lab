@@ -1,0 +1,8 @@
+"0",""
+"0","#Make violin plot"
+"0","ggplot(AlSi_data, aes(Source, Al.per.Si)) +"
+"0","  geom_violin() +"
+"0","  geom_boxplot(width=0.2, outliers = FALSE) +"
+"0","  facet_grid(~Basin, scales = ""free"", space = ""free"") +"
+"0","  theme(axis.text.x = element_text(angle = 30, hjust = 1, vjust = 1)) +"
+"0","  labs(x = """", y = ""Al per Si"")"

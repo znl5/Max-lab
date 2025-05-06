@@ -1,0 +1,5 @@
+"0",""
+"0","#Read data file for composition (Al/Si) of sed-free ANME-SRB consortia,"
+"0","# ANME-SRB consortia in sediments and sediments without ANME-SRB consortia"
+"0","AlSi_data <- read_excel(xfun::magic_path('Dataset S2.xlsx'))"
+"0","AlSi_data"
